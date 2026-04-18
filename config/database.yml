@@ -7,6 +7,12 @@
 # On Debian/Ubuntu:
 #   apt-get install libpq-dev
 #
+<%
+  # Derive the database name from the project directory so each template clone
+  # gets its own Postgres database instead of colliding on a shared name.
+  app_db_name = Rails.root.basename.to_s.downcase.gsub(/[^a-z0-9_]/, "_")
+%>
+
 default: &default
   adapter: postgresql
   encoding: unicode
@@ -20,22 +26,23 @@ default: &default
 
 development:
   <<: *default
-  database: build_new_development
+  database: <%= app_db_name %>_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: build_new_test
+  database: <%= app_db_name %>_test
 
 # Solid Queue, Solid Cache, and Solid Cable all share this single primary database.
 staging:
   <<: *default
-  database: build_new_staging
+  database: <%= app_db_name %>_staging
   url: <%= ENV["DATABASE_URL"] %>
 
 production:
   <<: *default
-  database: build_new_production
+  database: <%= app_db_name %>_production
   url: <%= ENV["DATABASE_URL"] %>
+
