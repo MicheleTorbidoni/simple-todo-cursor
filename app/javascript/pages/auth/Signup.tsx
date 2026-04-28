@@ -26,7 +26,11 @@ export default function Signup() {
 
   return (
     <>
-      <Head title="Sign up" />
+      <Head title="Sign up">
+        <meta name="description" content="Create a new account to get started." />
+        <meta property="og:title" content="Sign up" />
+        <meta property="og:description" content="Create a new account to get started." />
+      </Head>
       <AuthCard
         title="Create your account"
         subtitle={

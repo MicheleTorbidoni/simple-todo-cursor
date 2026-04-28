@@ -45,7 +45,7 @@ The `@` path alias resolves to `app/frontend/` in both Vite and TypeScript confi
 2. Controller action calls `render inertia: "PageName", props: { ... }`
 3. Create `app/javascript/pages/PageName.tsx`
 4. Wrap authenticated pages in `<AppShell title="...">` from `@/components/app-shell`
-5. Set a descriptive `<Head title>` and `<meta name="description">` on the page (see "Page metadata" below) — required for every page, no exceptions
+5. Set `<Head title>`, `<meta name="description">`, `<meta property="og:title">`, and `<meta property="og:description">` on the page (see "Page metadata" below) — required for every page, no exceptions
 6. If the page is **publicly viewable** (no `require_authentication`), also:
    - Add it to `config/sitemap.rb` so crawlers discover it
    - Add it to `public/llms.txt` under the right section
@@ -164,7 +164,7 @@ Three discovery files live at the site root and must stay in sync as public page
 
 ## Page metadata (every page, no exceptions)
 
-Every page component in `app/javascript/pages/` must set both a descriptive title and a meta description via Inertia's `<Head>`:
+Every page component in `app/javascript/pages/` must set, inside Inertia's `<Head>`, **all four** of: title, meta description, `og:title`, and `og:description`. Title + description drive search and accessibility; the `og:` tags drive social previews (Slack, Discord, X, LinkedIn, iMessage). Without explicit `og:` tags, social platforms fall back to `<title>` + `<meta name="description">` — which works, but doesn't let you tune the social-specific copy independently.
 
 ```tsx
 import { Head } from "@inertiajs/react"
@@ -175,6 +175,11 @@ export default function Pricing() {
       <Head title="Pricing">
         <meta
           name="description"
+          content="Plans, pricing, and what's included in each tier of <Product Name>."
+        />
+        <meta property="og:title" content="Pricing" />
+        <meta
+          property="og:description"
           content="Plans, pricing, and what's included in each tier of <Product Name>."
         />
       </Head>
@@ -188,9 +193,10 @@ export default function Pricing() {
 
 - **Title:** specific to the page — not the app name (the app name is appended by `app/javascript/entrypoints/inertia.ts` if a `title` callback is configured there). Keep under ~60 characters so it doesn't get truncated in search results.
 - **Description:** unique per page, written for humans, 120–160 characters, summarizes what the page is and why someone would land on it. Avoid keyword stuffing.
-- Public marketing pages (home, pricing, about, blog, docs, etc.) are crawled — these descriptions show up directly in search results and AI answers, so they matter most.
-- Authenticated pages still need them — they're disallowed in `robots.txt` but the title/description shows up in browser tabs, history, and link previews.
-- For social sharing on a public page, also add `og:title`, `og:description`, `og:image`, and `twitter:card` meta tags inside the same `<Head>`.
+- **`og:title` + `og:description`:** mirror title and description by default. Override only when the social-share copy should differ from the search-result copy (e.g. punchier headline, more conversion-focused).
+- Public marketing pages (home, pricing, about, blog, docs, etc.) are crawled — these tags show up directly in search results, AI answers, and link previews, so they matter most.
+- Authenticated pages still need them — they're disallowed in `robots.txt` but the title/description shows up in browser tabs, history, and link previews when someone shares an internal link.
+- For richer social previews on a public page, also add `og:image` (1200×630), `og:type`, and `twitter:card="summary_large_image"` inside the same `<Head>`.
 
 `app/javascript/pages/Home.tsx` is the canonical example to copy from.
 

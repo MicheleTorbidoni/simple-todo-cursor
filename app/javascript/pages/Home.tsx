@@ -10,6 +10,11 @@ export default function Home() {
           name="description"
           content="Starter landing page for the Build New Rails + Inertia template — replace this copy with the real product pitch."
         />
+        <meta property="og:title" content="Hello world" />
+        <meta
+          property="og:description"
+          content="Starter landing page for the Build New Rails + Inertia template — replace this copy with the real product pitch."
+        />
       </Head>
       <main className="flex min-h-svh items-center justify-center px-6">
         <div className="flex flex-col items-center gap-8 text-center">

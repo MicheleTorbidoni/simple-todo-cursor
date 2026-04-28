@@ -5,7 +5,11 @@ import { AppShell } from "@/components/app-shell"
 export default function Settings() {
   return (
     <>
-      <Head title="Settings" />
+      <Head title="Settings">
+        <meta name="description" content="Manage your account settings." />
+        <meta property="og:title" content="Settings" />
+        <meta property="og:description" content="Manage your account settings." />
+      </Head>
       <AppShell title="Settings">
         <div className="max-w-2xl space-y-2">
           <h2 className="text-2xl font-semibold tracking-tight">Settings</h2>

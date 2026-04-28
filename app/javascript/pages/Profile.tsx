@@ -30,7 +30,11 @@ export default function Profile() {
 
   return (
     <>
-      <Head title="Profile" />
+      <Head title="Profile">
+        <meta name="description" content="Update your email address and password." />
+        <meta property="og:title" content="Profile" />
+        <meta property="og:description" content="Update your email address and password." />
+      </Head>
       <AppShell title="Profile">
         <div className="mx-auto flex max-w-2xl flex-col gap-10">
           <div>

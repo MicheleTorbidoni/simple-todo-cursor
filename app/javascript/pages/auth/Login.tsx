@@ -20,7 +20,11 @@ export default function Login() {
 
   return (
     <>
-      <Head title="Log in" />
+      <Head title="Log in">
+        <meta name="description" content="Log in to your account." />
+        <meta property="og:title" content="Log in" />
+        <meta property="og:description" content="Log in to your account." />
+      </Head>
       <AuthCard
         title="Log in"
         subtitle={

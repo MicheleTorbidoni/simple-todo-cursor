@@ -22,7 +22,11 @@ export default function PasswordEdit({ token }: Props) {
 
   return (
     <>
-      <Head title="Choose a new password" />
+      <Head title="Choose a new password">
+        <meta name="description" content="Set a new password for your account." />
+        <meta property="og:title" content="Choose a new password" />
+        <meta property="og:description" content="Set a new password for your account." />
+      </Head>
       <AuthCard title="Choose a new password">
         <form onSubmit={submit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">

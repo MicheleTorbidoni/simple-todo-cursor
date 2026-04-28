@@ -18,7 +18,11 @@ export default function PasswordNew() {
 
   return (
     <>
-      <Head title="Reset your password" />
+      <Head title="Reset your password">
+        <meta name="description" content="Request a password reset link by email." />
+        <meta property="og:title" content="Reset your password" />
+        <meta property="og:description" content="Request a password reset link by email." />
+      </Head>
       <AuthCard
         title="Reset your password"
         subtitle="We'll email you a link to set a new password."
