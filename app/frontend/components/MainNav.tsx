@@ -170,10 +170,6 @@ function RailBody({
 
       <RailNav open={open} items={items} />
 
-      <div className="border-t border-hairline p-2">
-        <UserMenu open={open} />
-      </div>
-
       {!open && (
         <div className="border-t border-hairline p-2">
           <button
@@ -186,6 +182,10 @@ function RailBody({
           </button>
         </div>
       )}
+
+      <div className="border-t border-hairline p-2">
+        <UserMenu open={open} />
+      </div>
     </>
   )
 }
