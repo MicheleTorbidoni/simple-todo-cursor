@@ -16,6 +16,8 @@ default: &default
   password: <%= ENV["DATABASE_PASSWORD"] %>
   host: <%= ENV.fetch("DATABASE_HOST") { "localhost" } %>
   port: <%= ENV.fetch("DATABASE_PORT") { 5432 } %>
+  # Avoid Kerberos/GSS during libpq connect — crashes forked Solid Queue workers on macOS.
+  gssencmode: disable
 
 development:
   <<: *default

@@ -2,6 +2,11 @@
 
 export PORT="${PORT:-3000}"
 
+# Solid Queue forks worker processes; macOS + libpq Kerberos can SIGSEGV after fork.
+if [ "$(uname -s)" = "Darwin" ]; then
+  export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+fi
+
 if command -v overmind 1> /dev/null 2>&1
 then
   overmind start -f Procfile.dev "$@"

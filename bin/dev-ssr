@@ -3,6 +3,11 @@
 export PORT="${PORT:-3000}"
 export INERTIA_SSR=1
 
+# Solid Queue forks worker processes; macOS + libpq Kerberos can SIGSEGV after fork.
+if [ "$(uname -s)" = "Darwin" ]; then
+  export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+fi
+
 # Build the SSR bundle once before starting the process group, so the
 # Node SSR server has something to load on first start. The watcher in
 # Procfile.ssr keeps it fresh after that.
