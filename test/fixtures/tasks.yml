@@ -1,0 +1,14 @@
+one_pending:
+  user: one
+  name: Buy groceries
+  completed: false
+
+one_completed:
+  user: one
+  name: Read email
+  completed: true
+
+two_pending:
+  user: two
+  name: Other user task
+  completed: false
