@@ -1,0 +1,25 @@
+<h1>Your task summary</h1>
+
+<p>Hello<%= ", #{@user.email}" if @user.email.present? %>,</p>
+
+<h2>Active tasks</h2>
+<% if @pending_tasks.any? %>
+  <ul>
+    <% @pending_tasks.each do |task| %>
+      <li><%= task.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No active tasks.</p>
+<% end %>
+
+<h2>Completed tasks</h2>
+<% if @completed_tasks.any? %>
+  <ul>
+    <% @completed_tasks.each do |task| %>
+      <li><%= task.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No completed tasks.</p>
+<% end %>

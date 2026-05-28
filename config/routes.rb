@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :passwords, param: :token, only: %i[ new create edit update ]
 
   get "dashboard", to: "dashboard#show", as: :dashboard
+  post "dashboard/summary_email", to: "dashboard#summary_email", as: :dashboard_summary_email
+  delete "dashboard/pending_tasks", to: "dashboard#clear_pending_tasks", as: :dashboard_clear_pending_tasks
   resources :tasks, only: %i[ create update destroy ]
   get "settings",  to: "settings#show",  as: :settings
 

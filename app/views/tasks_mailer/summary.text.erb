@@ -1,0 +1,24 @@
+Your task summary
+=================
+
+Hello<%= ", #{@user.email}" if @user.email.present? %>,
+
+Active tasks
+------------
+<% if @pending_tasks.any? -%>
+<% @pending_tasks.each do |task| -%>
+- <%= task.name %>
+<% end -%>
+<% else -%>
+No active tasks.
+<% end -%>
+
+Completed tasks
+---------------
+<% if @completed_tasks.any? -%>
+<% @completed_tasks.each do |task| -%>
+- <%= task.name %>
+<% end -%>
+<% else -%>
+No completed tasks.
+<% end -%>
